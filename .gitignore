@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.log
+artifacts/
+.DS_Store
+Thumbs.db
+
+# Production/private vault material must never enter this showcase repo.
+/raw/
+/journal/
+/crm/
+/private/
+/exports/
+*.zip
+*.sqlite
+*.db

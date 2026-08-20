@@ -1,0 +1,17 @@
+# Shape only. Keep real tokens, chat IDs, and private prompts outside Git.
+model: gpt-5.5
+provider: openai-codex
+
+telegram:
+  allowed_chats:
+    - ${TELEGRAM_ALLOWED_CHAT_ID}
+  channel_prompts:
+    default: >-
+      Follow the AustinOS vault protocol. Ground answers in index.md and
+      relevant wiki pages. Use journal and CRM context only when authorized.
+  reactions:
+    enabled: true
+
+gateway:
+  enabled: true
+  log_level: INFO

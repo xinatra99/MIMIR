@@ -1,0 +1,25 @@
+name: Validate public reference
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Audit example vault
+        run: python scripts/vault_audit.py examples/vault
+      - name: Snapshot example metrics
+        run: python scripts/snapshot_metrics.py examples/vault
+      - name: Check documentation links
+        run: python scripts/check_markdown_links.py .
+      - name: Scan public repository boundary
+        run: python scripts/public_preflight.py .

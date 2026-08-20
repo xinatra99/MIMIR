@@ -1,0 +1,11 @@
+version = 1
+id = "process-second-brain-raw-files"
+kind = "cron"
+name = "Process Second Brain raw files"
+prompt = "If there are unprocessed files in raw/, process them according to AGENTS.md. Update index.md and append log.md. Validate provenance. Commit only scoped ingest changes and push only when authorized and network access is available."
+status = "ACTIVE"
+rrule = "RRULE:FREQ=WEEKLY;BYHOUR=23;BYMINUTE=0;BYDAY=SU,MO,TU,WE,TH,FR,SA"
+model = "gpt-5.5"
+reasoning_effort = "medium"
+execution_environment = "local"
+cwds = ["/absolute/path/to/private-vault"]
