@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit structural and provenance invariants in an AustinOS-style vault.
+"""Audit structural and provenance invariants in a MIMIR-compatible vault.
 
 The checker intentionally uses only the Python standard library. It validates
 deterministic concerns and leaves source interpretation to the agent/human.

@@ -2,9 +2,9 @@
 
 ## Design objective
 
-My Second Brain is designed to make accumulated information more useful over time. Its unit of value is not the captured source; it is the durable knowledge page that preserves evidence, explains mechanisms, records caveats, and connects to prior understanding.
+MIMIR is designed as an intelligent second brain that makes accumulated information more useful over time. Its unit of value is not the captured source; it is the durable knowledge page that preserves evidence, explains mechanisms, records caveats, and connects to prior understanding.
 
-The production implementation is AustinOS. This public repository models its architecture without distributing the private corpus.
+The production implementation is AustinOS. MIMIR models its agentic AI architecture and knowledge automation without distributing the private corpus.
 
 ## Component model
 

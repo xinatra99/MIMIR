@@ -1,14 +1,14 @@
-# My Second Brain
+# MIMIR
 
-> A file-first, agent-maintained knowledge system by **Austin BC**.
+> Agentic AI architecture and knowledge automation for an intelligent second brain by **Austin BC**.
 
-My Second Brain is the public engineering case study for **AustinOS**, my private production knowledge vault. The system combines Obsidian, Codex automations, Git version control, and a Hermes agent gateway to turn raw source material into a durable, queryable, and continuously maintained knowledge graph.
+MIMIR is the public engineering case study and reference implementation for **AustinOS**, my private production knowledge platform. It is a production-grade agentic knowledge system that serves as my intelligent second brain, orchestrating Obsidian, Codex, Hermes Agents, and Git across governed pipelines for automated ingestion, synthesis, validation, versioning, and retrieval.
 
 This repository intentionally contains architecture, sanitized configuration, reference scripts, operational evidence, and implementation notes—not the private journal, CRM, conversations, credentials, or raw source corpus from AustinOS.
 
-![AustinOS knowledge graph](docs/images/knowledge-graph.png)
+![MIMIR intelligent second brain knowledge graph](docs/images/knowledge-graph.png)
 
-## What the system does
+## What MIMIR does
 
 AustinOS treats personal knowledge as a maintained software system rather than a passive notes folder:
 
@@ -168,7 +168,7 @@ Read [privacy-model.md](docs/privacy-model.md) and [SECURITY.md](SECURITY.md) be
 ## Provenance
 
 - **Author:** Austin BC
-- **Public project:** My Second Brain
+- **Public project:** MIMIR
 - **Private production system:** AustinOS (`xntr99/AustinOS`, intentionally private)
 - **Primary interface:** Obsidian
 - **Knowledge compiler and maintenance agent:** Codex

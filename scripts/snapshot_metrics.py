@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Emit a point-in-time JSON inventory for an AustinOS-style vault."""
+"""Emit a point-in-time JSON inventory for a MIMIR-compatible knowledge vault."""
 
 from __future__ import annotations
 

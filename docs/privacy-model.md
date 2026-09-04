@@ -2,7 +2,7 @@
 
 ## Boundary
 
-AustinOS is private because it contains personal journals, relationship context, financial and health material, exported conversations, and raw source collections. My Second Brain is public because it contains only the engineering pattern and approved evidence.
+AustinOS is private because it contains personal journals, relationship context, financial and health material, exported conversations, and raw source collections. MIMIR is public because it contains only the engineering architecture, sanitized tooling, and approved operational evidence.
 
 ```mermaid
 flowchart LR
@@ -20,7 +20,7 @@ flowchart LR
         Preflight[Public preflight]
     end
 
-    subgraph Public[My Second Brain - public]
+    subgraph Public[MIMIR - public]
         Architecture[Architecture]
         Scripts[Reference scripts]
         Examples[Fabricated examples]
