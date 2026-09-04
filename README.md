@@ -4,6 +4,8 @@
 
 MIMIR is the public engineering case study and reference implementation for **AustinOS**, my private production knowledge platform. It is a production-grade agentic knowledge system that serves as my intelligent second brain, orchestrating Obsidian, Codex, Hermes Agents, and Git across governed pipelines for automated ingestion, synthesis, validation, versioning, and retrieval.
 
+MIMIR is inspired by [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f): instead of reconstructing knowledge from raw documents at every query, an LLM incrementally compiles and maintains a persistent, interlinked Markdown wiki. Rather than implementing the operating schema around Claude Code and `CLAUDE.md`, MIMIR uses Codex with `AGENTS.md` as its control contract, Obsidian as the graph-based knowledge interface, and Git as the auditable state layer.
+
 This repository intentionally contains architecture, sanitized configuration, reference scripts, operational evidence, and implementation notes—not the private journal, CRM, conversations, credentials, or raw source corpus from AustinOS.
 
 ![MIMIR intelligent second brain knowledge graph](docs/images/knowledge-graph.png)
@@ -168,6 +170,7 @@ Read [privacy-model.md](docs/privacy-model.md) and [SECURITY.md](SECURITY.md) be
 ## Provenance
 
 - **Author:** Austin BC
+- **Architectural influence:** [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
 - **Public project:** MIMIR
 - **Private production system:** AustinOS (`xntr99/AustinOS`, intentionally private)
 - **Primary interface:** Obsidian
