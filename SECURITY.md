@@ -6,7 +6,7 @@ This repository is a public reference implementation. The private AustinOS vault
 
 ## Never commit
 
-- `.env` files or credential stores;
+- `.env` variants or credential stores (only clearly synthetic `.env.example`, `.env.sample`, and `.env.template` files are allowed);
 - Telegram bot tokens or chat IDs;
 - OpenAI device codes, refresh tokens, or API keys;
 - Hermes state databases, sessions, logs, or personal memory;
@@ -20,9 +20,10 @@ This repository is a public reference implementation. The private AustinOS vault
 python scripts/public_preflight.py .
 python scripts/vault_audit.py examples/vault
 python scripts/check_markdown_links.py .
+gitleaks git --redact --no-banner .
 ```
 
-Review every image manually. Automated scanners cannot reliably detect all personal information embedded in screenshots.
+CI additionally scans full Git history and tests the release-boundary guard. Review every image manually because automated scanners cannot reliably detect personal information embedded in screenshots.
 
 ## Reporting
 

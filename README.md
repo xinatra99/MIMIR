@@ -154,6 +154,8 @@ Credentials, chat identifiers, device codes, environment files, and personal pro
 
 Additional screenshots and their interpretation are cataloged in [screenshots.md](docs/screenshots.md).
 
+Public screenshot assets are privacy-safe reconstructions: they retain the operational layout and technical meaning while using fictional usernames, hostnames, paths, and note titles.
+
 ## Security and privacy
 
 The private AustinOS repository is the source system. It contains personal notes and other sensitive source material and is **not** suitable for public release. This repository uses a clean-room public boundary:

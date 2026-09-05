@@ -1,6 +1,6 @@
 # Screenshot Evidence Catalog
 
-All images are user-supplied captures from Austin BC's operational environment. No AI-generated artwork is used.
+The images preserve the layout and technical meaning of user-supplied operational captures, but identity-bearing paths, hostnames, and private note titles are replaced with synthetic examples. Several screenshots are privacy-safe reconstructions rather than byte-for-byte production captures.
 
 ## Knowledge graph
 
@@ -20,7 +20,7 @@ This graph highlights the conversation collection and its links into durable kno
 
 ![Codex automation definition](images/codex-automation-definition.png)
 
-The scheduled Codex task identifies the AustinOS project, remembers prior runs, processes loose raw files, and requests a Git update after successful compilation.
+The scheduled Codex task demonstrates project selection, prior-run memory, loose-raw-file processing, and a Git update after successful compilation.
 
 ![Successful Codex ingest](images/codex-ingestion-run.png)
 
@@ -38,13 +38,13 @@ The page demonstrates typed metadata, multiple source paths, source links, struc
 
 ![Wiki catalog](images/wiki-catalog.png)
 
-The file catalog shows topic breadth across AI, cybersecurity, finance, career, belief, engineering, and personal operations.
+The synthetic file catalog shows representative breadth across architecture, ingestion, validation, security, and release operations.
 
 ## Agent runtime
 
 ![Hermes Agent interface](images/hermes-agent-tui.png)
 
-The Hermes TUI shows the selected model/provider, available tools, and the AustinOS vault protocol among installed skills.
+The Hermes TUI shows the selected model/provider, available tools, and a vault protocol among installed skills.
 
 ![Hermes diagnostics](images/hermes-doctor.png)
 

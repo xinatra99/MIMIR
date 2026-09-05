@@ -14,13 +14,31 @@ TEXT_EXTENSIONS = {
     ".md", ".txt", ".toml", ".yaml", ".yml", ".json", ".py", ".ps1",
     ".sh", ".service", ".ini", ".cfg", ".conf", ".xml", ".js", ".ts",
 }
+MAX_TEXT_BYTES = 2 * 1024 * 1024
 FORBIDDEN_ROOT_DIRECTORIES = {"raw", "journal", "crm", "private", "exports"}
-FORBIDDEN_FILENAMES = {".env", "credentials.json", "state.db", "cookies.txt"}
+FORBIDDEN_FILENAMES = {
+    ".env", "credentials.json", "state.db", "cookies.txt", "id_rsa", "id_ed25519",
+}
+FORBIDDEN_SUFFIXES = {".key", ".pem", ".p12", ".pfx", ".ppk"}
+ALLOWED_ENV_TEMPLATES = {".env.example", ".env.sample", ".env.template"}
 SECRET_PATTERNS = {
     "OpenAI-style secret": re.compile(r"\bsk-[A-Za-z0-9_-]{20,}\b"),
-    "GitHub token": re.compile(r"\bgh[pousr]_[A-Za-z0-9]{20,}\b"),
+    "GitHub classic token": re.compile(r"\bgh[pousr]_[A-Za-z0-9]{20,}\b"),
+    "GitHub fine-grained token": re.compile(r"\bgithub_pat_[A-Za-z0-9_]{20,}\b"),
+    "AWS access key": re.compile(r"\b(?:AKIA|ASIA)[A-Z0-9]{16}\b"),
+    "Google API key": re.compile(r"\bAIza[A-Za-z0-9_-]{35}\b"),
+    "Slack token": re.compile(r"\bxox[baprs]-[A-Za-z0-9-]{10,}\b"),
+    "Stripe live secret": re.compile(r"\bsk_live_[A-Za-z0-9]{16,}\b"),
     "Telegram bot token": re.compile(r"\b\d{8,12}:[A-Za-z0-9_-]{30,}\b"),
-    "private key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+    "JWT": re.compile(r"\beyJ[A-Za-z0-9_-]{10,}\.eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\b"),
+    "credential-bearing URI": re.compile(
+        r"\b(?:https?|postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis)://"
+        r"[^\s/:@]+:[^\s/@]+@[^\s]+",
+        re.IGNORECASE,
+    ),
+    "private key": re.compile(
+        r"-----BEGIN (?:RSA |DSA |EC |OPENSSH )?PRIVATE KEY-----"
+    ),
 }
 
 
@@ -34,9 +52,21 @@ def iter_files(root: Path):
         if not path.is_file():
             continue
         relative = path.relative_to(root)
-        if any(part in SKIP_DIRECTORIES for part in relative.parts):
+        if any(part.casefold() in SKIP_DIRECTORIES for part in relative.parts):
             continue
         yield path, relative
+
+
+def is_forbidden_filename(path: Path) -> bool:
+    name = path.name.casefold()
+    if name in FORBIDDEN_FILENAMES or path.suffix.casefold() in FORBIDDEN_SUFFIXES:
+        return True
+    return name.startswith(".env") and name not in ALLOWED_ENV_TEMPLATES
+
+
+def should_scan_text(path: Path) -> bool:
+    name = path.name.casefold()
+    return path.suffix.casefold() in TEXT_EXTENSIONS or name.startswith(".env")
 
 
 def main() -> int:
@@ -51,18 +81,28 @@ def main() -> int:
             findings.append(f"forbidden production/private directory at repository root: {name}/")
 
     for path, relative in iter_files(root):
-        if path.name.casefold() in FORBIDDEN_FILENAMES:
+        if is_forbidden_filename(path):
             findings.append(f"forbidden credential/state filename: {relative}")
 
         if relative.parts and relative.parts[0].casefold() in FORBIDDEN_ROOT_DIRECTORIES:
             if not is_example_private_path(relative):
                 findings.append(f"private vault path outside fabricated example: {relative}")
 
-        if path.suffix.casefold() not in TEXT_EXTENSIONS:
+        if not should_scan_text(path):
+            continue
+        try:
+            if path.stat().st_size > MAX_TEXT_BYTES:
+                findings.append(f"text-like file exceeds {MAX_TEXT_BYTES} byte scan limit: {relative}")
+                continue
+        except OSError:
+            findings.append(f"could not stat text-like file: {relative}")
             continue
         try:
             text = path.read_text(encoding="utf-8-sig")
-        except (UnicodeDecodeError, OSError):
+        except UnicodeDecodeError:
+            continue
+        except OSError:
+            findings.append(f"could not read text-like file: {relative}")
             continue
         for label, pattern in SECRET_PATTERNS.items():
             for match in pattern.finditer(text):
